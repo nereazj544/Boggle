@@ -11,3 +11,15 @@ td{
     border: 1px solid black;
     cursor: pointer;
 }
+
+td.selectable{
+cursor: pointer;
+}
+
+td:hover{
+    background: aqua;
+}
+
+td.selected{
+    background: #bada55;
+}

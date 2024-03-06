@@ -32,3 +32,10 @@ export const stCubes: string[] = [
 'GILRUW', 
 'HLNNRZ',
 ];
+
+
+//!Se usan los cubos nuevos y viejos.
+/*
+! URL de referencia:
+* https://www.bananagrammer.com/2013/10/the-boggle-cube-redesign-and-its-effect.html
+*/

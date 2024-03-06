@@ -1,9 +1,19 @@
 <table *ngIf="letters.length">
     <tr *ngFor="let r of [0, 1, 2, 3]">
-        <td *ngFor="let c of [0, 1, 2, 3]">
+        <td *ngFor="let c of [0, 1, 2, 3]" [class.selected]="selectedCells.has(r + ',' + c)"
+        [class.selecteble]="isCellSectable(r,c)"
+            (click)="selectLetter(r, c)">
             {{letters[r * 4 + c]}}
         </td>
     </tr>
 </table>
+
+<p>{{letterSelected.join('')}}</p>
+
+<ul>
+    <li *ngFor="let w of wordsFound">{{w}}</li>
+</ul>
+
+<button (click)="commitWord()">Palabra encontrada</button>
 
 <button (click)="starGame()">Empezar juego</button>

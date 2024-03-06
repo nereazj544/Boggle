@@ -1,4 +1,4 @@
-const dicionary =[
+export const dicionary =[
 'Casa',
 'Perro',
 'Gato',
