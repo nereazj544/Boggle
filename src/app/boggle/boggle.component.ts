@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { stCubes } from './cubes';
-import { last } from 'rxjs';
+// import { last } from 'rxjs';
 import { dicionary } from './dictionary';
 
 @Component({
@@ -86,7 +86,7 @@ export class BoggleComponent implements OnInit {
 }
 
 function shuffle<T>(items: T[]): void {
-  for (let i = 0; i < items.length - 2; i++) {
+  for (let i = 0; i < items.length - 1; i++) {
     const swapIndex = Math.floor(Math.random() * (items.length - i));
     [items[i], items[swapIndex]] = [items[swapIndex], items[i]];
   }
