@@ -1,0 +1,9 @@
+<table *ngIf="letters.length">
+    <tr *ngFor="let r of [0, 1, 2, 3]">
+        <td *ngFor="let c of [0, 1, 2, 3]">
+            {{letters[r * 4 + c]}}
+        </td>
+    </tr>
+</table>
+
+<button (click)="starGame()">Empezar juego</button>

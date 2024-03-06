@@ -1,0 +1,22 @@
+const dicionary =[
+'Casa',
+'Perro',
+'Gato',
+'Árbol',
+'Computadora',
+'Libro',
+'Amigo',
+'Agua',
+'Sol',
+'Mesa',
+'House',
+'Dog',
+'Cat',
+'Tree',
+'Computer',
+'Book',
+'Friend',
+'Water',
+'Sun',
+'Table'
+];
