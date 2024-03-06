@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { stCubes } from './cubes';
 // import { last } from 'rxjs';
 import { dicionary } from './dictionary';
+import { IfStmt } from '@angular/compiler';
 
 @Component({
   selector: 'app-boggle',
@@ -18,7 +19,7 @@ export class BoggleComponent implements OnInit {
   //! Palabras
   protected letterSelected: string [] = [];
   protected selectedCells = new Set<string>();
-  protected lasSelectedCell: [number, number] | null = null;
+  protected selectedCellStack: [number, number][] = [];
 
   ngOnInit() {
     this.starGame();
@@ -31,16 +32,35 @@ export class BoggleComponent implements OnInit {
       return;
     }
     if (this.selectedCells.has(`${row}, ${col}`)) {
-      return;
+      if (this.isLastSelectedCell(row, col)) {
+        this.letterSelected.pop()
+        this.selectedCellStack.shift();
+        this.selectedCells.delete(`${row}, ${col}`);
+        return;
+      }
     }
     this.selectedCells.add(`${row}, ${col}`);
     this.letterSelected.push(this.letters[row * 4 + col]);
-    this.lasSelectedCell = [row, col];
+    this.selectedCellStack.unshift([row, col]);
   }
 
   protected isCellSectable(row: number, col: number){
-    return !this.lasSelectedCell || (Math.abs(row - this.lasSelectedCell[0]) <= 1 && Math.abs(col - this.lasSelectedCell[1]) <= 1);
-    ;
+    const lastSelected = this.selectedCellStack[0];
+    
+    if(!this.selectedCellStack.length){
+      return true;
+    }
+
+    if (!this.selectedCells.has(`${row}, ${col}`)) {
+      return Math.abs(row - lastSelected[0]) <= 1 && Math.abs(col - lastSelected[1]) <= 1;
+    }else{
+      return row === lastSelected[0] && col === lastSelected[0];
+    }
+  }
+
+  protected isLastSelectedCell(row: number, col: number){
+    return this.selectedCellStack.length &&
+    row == this.selectedCellStack[0][0] && col == this.selectedCellStack[0][1]
   }
 
   starGame() {
@@ -62,25 +82,28 @@ export class BoggleComponent implements OnInit {
 
   //!Puntuaje
   protected score() {
+    return this.wordsFound.map(w => w.length)
   }
 
 
   //! Palabra encontrtada
   commitWord() {
     const word = this.letterSelected.join('').toLowerCase();
-    if (dicionary.includes(word)) {
+    // if (dicionary.includes(word)) {
       this.wordsFound.push(word);
-    }
+    // }
 
     this.restSelection();
   }
   
-  private restSelection() {
-    this.lasSelectedCell = null;
+  protected restSelection() {
+    this.selectedCellStack = [];
     this.letterSelected = [];
     this.selectedCells = new Set<string>();
   }
   
+
+
 
 
 }

@@ -2,18 +2,21 @@
     <tr *ngFor="let r of [0, 1, 2, 3]">
         <td *ngFor="let c of [0, 1, 2, 3]" [class.selected]="selectedCells.has(r + ',' + c)"
         [class.selectable]="isCellSectable(r,c)"
+        [class.last-selected]="isLastSelectedCell(r, c)"
             (click)="selectLetter(r, c)">
             {{letters[r * 4 + c]}}
         </td>
     </tr>
 </table>
 
-<p>{{letterSelected.join('')}}</p>
+<p>{{letterSelected.join('')}}
+    PUNTOS: {{score()}}
+</p>
 
 <ul>
     <li *ngFor="let w of wordsFound">{{w}}</li>
 </ul>
 
 <button (click)="commitWord()">Palabra encontrada</button>
-
+<button (click)="restSelection()">Limpiar</button>
 <button (click)="starGame()">Empezar juego</button>

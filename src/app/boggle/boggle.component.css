@@ -23,3 +23,7 @@ td:hover{
 td.selected{
     background: #bada55;
 }
+
+td.last-selected{
+    border:  1px solid red;
+}
